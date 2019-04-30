@@ -1,0 +1,16 @@
+interval: 2h
+hosts:
+  - host: ping.online.net
+    ports:
+      - 5201
+      - 5202
+  - host: bouygues.iperf.fr
+    ports:
+      - 5207
+      - 5208
+      - 5209
+mqtt:
+  host: mqtt.host
+  username: speedtest
+  password: speedtest
+  topic: sensor/speedtest
