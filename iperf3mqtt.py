@@ -57,6 +57,7 @@ def run_test(test_type, config):
     print("Running %s" % test_type, file=sys.stderr)
 
     server = random.choice(config["hosts"])
+    print("Using %s" % server.get("host", None), file=sys.stderr)
     client = iperf3.Client()
     client.server_hostname = server["host"]
     client.port = random.choice(server["ports"])
@@ -101,7 +102,7 @@ def load_config(config_file, mqttc):
     try:
         config = yaml.load(open(config_file), Loader=yaml.SafeLoader)
     except FileNotFoundError:
-        print("Config not found. Using default values.")
+        print("Config not found. Using default values.", file=sys.stderr)
         config = {
             "interval": "90m",
             "hosts": [
@@ -124,6 +125,9 @@ def load_config(config_file, mqttc):
 
     config["interval"] = parse(config.get("interval", "60m"))
     mqtt_config = config.get("mqtt", {"username": "", "password": ""})
+    print("Using MQTT-Server %s:%s" % (mqtt_config.get("host", "127.0.0.1"),
+                                       mqtt_config.get("port", 1883)),
+          file=sys.stderr)
     mqttc.username_pw_set(mqtt_config.get("username", ""),
                           mqtt_config.get("password", ""))
 
