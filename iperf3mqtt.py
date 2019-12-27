@@ -91,6 +91,8 @@ def run_test(test_type, config):
 
     result = client.run()
 
+    logger.info("Running test...")
+
     if result is not None and \
             hasattr(result, 'error') and \
             result.error is not None:
@@ -98,6 +100,8 @@ def run_test(test_type, config):
                      client.port, result.error)
 
         return None
+
+    logger.info("Got a result!")
 
     return getattr(result, test_type, None)
 
