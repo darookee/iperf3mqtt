@@ -52,6 +52,9 @@ def run_tests(config, mqtt_config, mqttc):
     logger.info("Pinging")
     ping_result = ping(random.choice(config["hosts"])["host"], unit='ms')
 
+    if ping_result is None:
+        ping_result = 0
+
     logger.info("Down: %f, Up: %f, Ping: %f", result_down, result_up,
                 ping_result)
 
