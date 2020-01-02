@@ -88,6 +88,7 @@ def run_test(test_type, config):
     client.port = random.choice(server["ports"])
     client.verbose = False
     client.zerocopy = True
+    client.duration = 5
     logger.info("Using port %s", client.port)
 
     if test_type == 'received_bps':
